@@ -1,0 +1,163 @@
+﻿<Window x:Class="WpfAppStorage.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAppStorage.Views"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="1000">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TabControl Grid.Row="0" SelectedItem="{Binding tabItemSelect}">
+                     
+            <!--AREA TAB APPLIANCES-->
+            <TabItem Name="AppliancesTab" Header="Бытовая техника">
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Редактирование" Command="{Binding OpenWinEdit}"/>
+                        <MenuItem Header="Удалить" Command="{Binding DeleteItem}"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
+                <Grid>
+                 
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    <TextBox Grid.Row="0" Text="Поиск" Height="25" TextAlignment="Center" VerticalAlignment="Center"/>
+                    <ListView x:Name="ViewAllAplicances" Grid.Row="1" 
+                              ItemsSource="{Binding AllApplicances}"
+                              SelectedItem="{Binding SelectApplicances}">
+                        
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Width="auto" Header="Наименование"
+                                            DisplayMemberBinding="{Binding Path=Name}"/>
+                                <GridViewColumn Width="auto" Header="Тип техники"
+                                            DisplayMemberBinding="{Binding Path=TypeAplicances.NameType}"/>
+                                <GridViewColumn Width="auto" Header="Цена"
+                                            DisplayMemberBinding="{Binding Path=Price}"/>
+                                <GridViewColumn Width="auto" Header="Количество"
+                                            DisplayMemberBinding="{Binding Path=CountApplicances}"/>
+                                <GridViewColumn Width="auto" Header="Поставщик"
+                                            DisplayMemberBinding="{Binding Path=Provider.NameCompany}"/>
+                                <GridViewColumn Width="auto" Header="Секция склада"
+                                            DisplayMemberBinding="{Binding Path=SectionsStorage.NameSections}"/>
+                                <GridViewColumn Width="auto" Header="Дата поступления"
+                                            DisplayMemberBinding="{Binding Path=AddDate}"/>
+                            </GridView>
+                    </ListView.View>
+                </ListView>
+                    <Button Grid.Row="2" Width="200" Content="Добавить новую запить" Command="{Binding OpenAddApplicancesWindow}"></Button>
+                </Grid>
+            </TabItem>
+            <!--END AREA TAB APPLIANCES-->
+
+            <!--AREA TAB TYPE APPLIANCES -->
+            <TabItem Name="TypeAppliancesTab" Header="Тип техники">
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Редактирование" Command="{Binding OpenWinEdit}"/>
+                        <MenuItem Header="Удалить" Command="{Binding DeleteItem}"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    <TextBox Grid.Row="0" Text="Поиск" Height="25" TextAlignment="Center" VerticalAlignment="Center"/>
+                    <ListView x:Name="ViewAllTypeAplicances" Grid.Row="1" 
+                              ItemsSource="{Binding AllType}"
+                              SelectedItem="{Binding TypeAplicancesApplic}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="auto" Header="Наименование"
+                                                DisplayMemberBinding="{Binding Path=NameType}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Button Grid.Row="2" Width="200" Content="Добавить новую запить" Command="{Binding OpenAddTypeApplicancesWindow}"></Button>
+                </Grid>
+            </TabItem>
+            <!-- END AREA TAB TYPE APPLIANCES -->
+
+            <!--AREA TAB PROVIDER -->
+            <TabItem Name="ProviderTab" Header="Поставщик">
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Редактирование" Command="{Binding OpenWinEdit}"/>
+                        <MenuItem Header="Удалить" Command="{Binding DeleteItem}"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    <TextBox Grid.Row="0" Text="Поиск" Height="25" TextAlignment="Center" VerticalAlignment="Center"/>
+                    <ListView x:Name="ViewAllProviders" Grid.Row="1" 
+                              ItemsSource="{Binding AllProviders}"
+                              SelectedItem="{Binding ProviderApplic}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="auto" Header="Наименование организации"
+                                                DisplayMemberBinding="{Binding Path=NameCompany}"/>
+                                <GridViewColumn Width="auto" Header="Страна"
+                                                DisplayMemberBinding="{Binding Path=Country}"/>
+                                <GridViewColumn Width="auto" Header="Город"
+                                                DisplayMemberBinding="{Binding Path=City}"/>
+                                <GridViewColumn Width="auto" Header="Улица"
+                                                DisplayMemberBinding="{Binding Path=Street}"/>
+                                <GridViewColumn Width="auto" Header="Номер дома"
+                                                DisplayMemberBinding="{Binding Path=NumberHouse}"/>
+                                <GridViewColumn Width="auto" Header="Контактный телефон"
+                                                DisplayMemberBinding="{Binding Path=PhoneNumber}"/>
+                               
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Button Grid.Row="2" Width="200" Content="Добавить новую запить" Command="{Binding OpenAddProviderWindow}"></Button>
+                </Grid>
+            </TabItem>
+            <!-- END AREA TAB PROVIDER -->
+
+            <!--AREA TAB SECTIONS STORAGE -->
+            <TabItem Name="SectionsStorageTab" Header="Секции склада">
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Редактирование" Command="{Binding OpenWinEdit}"/>
+                        <MenuItem Header="Удалить" Command="{Binding DeleteItem}"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    <TextBox Grid.Row="0" Text="Поиск" Height="25" TextAlignment="Center" VerticalAlignment="Center"/>
+                    <ListView x:Name="ViewAllSectionsStorage" Grid.Row="1" 
+                              ItemsSource="{Binding AllSection}"
+                              SelectedItem="{Binding SectionsStorageApplic}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="auto" Header="Наименование секции"
+                                                DisplayMemberBinding="{Binding Path=NameSections}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Button Grid.Row="2" Width="200" Content="Добавить новую запить" Command="{Binding OpenAddSectionsStorageWindow}"></Button>
+                </Grid>
+            </TabItem>
+            <!--END AREA TAB SECTIONS STORAGE -->
+            
+        </TabControl>
+    </Grid>
+</Window>
